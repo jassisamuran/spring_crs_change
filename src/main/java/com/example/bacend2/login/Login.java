@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@CrossOrigin(origins = "https://jassisamuran.github.io")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class Login {
 	
 	private final String apiUrl = "https://qa2.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp";
 
-@CrossOrigin(origins = "https://jassisamuran.github.io")
+@CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<String> makeApiRequest(@RequestBody LoginData requestData) {
         HttpHeaders headers = new HttpHeaders();
