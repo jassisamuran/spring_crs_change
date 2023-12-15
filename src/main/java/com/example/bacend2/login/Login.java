@@ -33,10 +33,15 @@ public class Login {
 
         // Make the POST request
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
-
-        // You can process the response as needed
-        return responseEntity;
+      
+	try {
+     	   ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
+        	return ResponseEntity.status(200).headers(headers).body(requestEntity.getBody());
+   	 } catch (Exception e) {
+        	return ResponseEntity.status(500).headers(headers).body(e.getMessage());
+    }
+    // You can process the response as needed
+}
     }
 	@PostMapping("/now")
 	  public ResponseEntity<String> handle(@RequestBody LoginData loginData ) {
