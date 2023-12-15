@@ -21,27 +21,25 @@ public class Login {
 @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<String> makeApiRequest(@RequestBody LoginData requestData) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        // Create the request body
-        String requestBody = String.format("{\"login_id\": \"%s\", \"password\": \"%s\"}",
-                requestData.getLogin_id(), requestData.getPassword());
-
-        // Create the HttpEntity with headers and body
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-
-        // Make the POST request
-        RestTemplate restTemplate = new RestTemplate();
-      
-	try {
-     	   ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
-        	return ResponseEntity.status(200).headers(headers).body(requestEntity.getBody());
-   	 } catch (Exception e) {
-        	return ResponseEntity.status(500).headers(headers).body(e.getMessage());
-    }
-    // You can process the response as needed
-}
+            HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.setAccessControlAllowOrigin("*");
+	    // Create the request body
+	    String requestBody = String.format("{\"login_id\": \"%s\", \"password\": \"%s\"}",
+	            requestData.getLogin_id(), requestData.getPassword());
+	
+	    // Create the HttpEntity with headers and body
+	    HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+	
+	    // Make the POST request
+	    RestTemplate restTemplate = new RestTemplate();
+	    try {
+	        ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
+	        return ResponseEntity.status(200).headers(headers).body(requestEntity.getBody());
+	    } catch (Exception e) {
+	        return ResponseEntity.status(500).headers(headers).body(e.getMessage());
+	    }
+	}
     }
 	@PostMapping("/now")
 	  public ResponseEntity<String> handle(@RequestBody LoginData loginData ) {
