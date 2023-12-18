@@ -1,23 +1,18 @@
-package com.example.bacend2.config;
+package com.example.bacend2;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 @Configuration
-@EnableWebMvc
-public class CorsConfig implements WebMvcConfigurer {
+public class corsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("https://jassisamuran.github.io")
+        registry.addMapping("/api/**")
+                .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*")
                 .allowCredentials(true)
-                .maxAge(3600);
+                .maxAge(3600); // maxAge in seconds
     }
 }
-
-
